@@ -10,3 +10,7 @@
 ## Reporting
 
 ### Soal 1
+
+Untuk nomor 1 membuat topologi 
+![alt text](Images/soal1_a.png)
+
