@@ -14,7 +14,7 @@
 Untuk nomor 1 membuat topologi 
 ![alt text](Images/soal1_a.png)
 
-###Soal 2
+### Soal 2
 
 
 Untuk nomor 2 kita memastikan bahwa host di dalam jaringan dapat mengakses layanan eksternal menggunakan IP address. Kita bisa mengeceknya dengan menjalankan:
@@ -32,7 +32,10 @@ sysctl -p
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE n
 ```
 
-Setelah itu kita bisa lakukan uji traffic dari host internal, berikut contohnya pada Earendil:
+Setelah itu kita bisa lakukan uji traffic dari host internal, berikut contohnya pada Maglor:
+
+
+![alt text](Images/soal_2_a.png)
 
 
 Hasil tersebut menunjukkan NAT berhasil meneruskan trafik.
@@ -43,7 +46,12 @@ Hasil tersebut menunjukkan NAT berhasil meneruskan trafik.
 Untuk soal ini memastikan bahwa semua klien dapat saling berkomunikasi lintas jalur melalui routing internal via Eonwe. Berikut hasil tes ping dari Cirdan dengan IP Elwing
 
 
+![alt text](Images/soal_3_b.png)
+
+
 Respon ping menunjukkan bahwa routing internal berfungsi dengan seharusnya. Lalu menambahkan `echo "nameserver 192.168.122.1" >> /etc/resolv.conf` kedalam konfigurasi masing-masing node. Untuk mengecek apakah berhasil bisa melakukan uji akses internet ke google.
+
+![alt text](Images/soal_3_a.png)
 
 
 ###Soal 4
@@ -99,13 +107,17 @@ nameserver 192.225.3.4
 nameserver 192.168.122.1" > /etc/resolv.conf
 ```
 
-Lalu kita bisa tes dengan menjalankan dig @192.225.3.3 K28.com pada Tirion dan dig @192.225.3.3 K28.com pada Valmar. Berikut hasilnya:
+Lalu kita bisa tes dengan menjalankan dig @192.225.3.3 K28.com pada Tirion, dig @192.225.3.3 K28.com pada Valmar, atau pada non-host lainnya. Berikut hasil dig yang diuji pada earendil:
+
+![alt text](Images/soal_4_a.png)
+![alt text](Images/soal_4_b.png)
+
 
 ### Soal 5
 
 Di soal ini kita Menamai hostname semua tokoh sesuai glosarium pada soal dan menguji keberhasilannya;
 
-Pertama-tama kita bisa Set Hostname System-Wide di set node, misal pada Earendil:
+Pertama-tama kita bisa set Hostname System-Wide di set node, misal pada Earendil:
 
 ```
 hostnamectl set-hostname earendil || echo "earendil" > /etc/hostname
@@ -116,7 +128,7 @@ EOF
 hostname earendil
 ```
 
-Kita lakukan hal serupa pada semua node lain kecuali pada ns1 dan ns2 yang sudah dikonfigurasi. Jika sudah maka bisa mereboot node (bisa dengan menjalankan reload). Lalu kita buat domain dan meng-assign A record di `/etc/bind/zones/db.K28.com` Tirion seperti ini:
+Kita lakukan hal serupa pada semua node lain kecuali pada ns1 dan ns2 yang sudah dikonfigurasi. Jika sudah maka bisa me-reboot node (bisa dengan menjalankan reload). Lalu kita buat domain dan meng-assign A record di `/etc/bind/zones/db.K28.com` Tirion seperti ini:
 
 ```
 eonwe   IN A 192.225.1.1
@@ -132,6 +144,8 @@ vingilot IN A 192.225.3.6
 
 Jika sudah bisa reload bind dengan /usr/sbin/named -u bind, dan terakhir melakukan tes pada IP, misalnya dengan dig earendil.K28.com @192.225.3.3 di Earendil
 
+![alt text](Images/soal_5_a.png)
+
 
 ### Soal 6 
 
@@ -143,7 +157,10 @@ Pertama kita trigger zone di tirion:
 rndc notify K28.com
 ```
 
-Disini status harus "zone notify queued". Lalu menyinkronkan zona di Valmar dengan `killall named && /usr/sbin/named -u bind` Terakhir kita bisa verifikasi dengan DNS query dan membandingkan 2 serial.
+Disini status harus "zone notify queued". Lalu zona disinkronkan pada Valmar dengan `killall named && /usr/sbin/named -u bind` Terakhir kita bisa verifikasi dengan DNS query dan membandingkan 2 serial. Berikut hasil perbandingan yang diuji pada Tirion dan Valmar:
+ 
+![alt text](Images/soal_6_a.png)
+![alt text](Images/soal_6_b.png)
 
 
 ### Soal 7 
@@ -151,7 +168,7 @@ Disini status harus "zone notify queued". Lalu menyinkronkan zona di Valmar deng
 Tujuan utama soal ini: Menambahkan A record untuk sirion.K28.com, lindon.K28.com, dan vingilot.K28.com dengan IP masing-masing, lalu menetapkan CNAME untuk www.K28.com, static.K28.com, dan app.K28.com, serta memverifikasi dari dua klien berbeda
 
 
-Pertama edit /etc/bind/zones/db.K28.com dan tambah ini:
+Pertama edit /etc/bind/zones/db.K28.com dan tambah:
 
 ```
 www      IN CNAME sirion.K28.com.
@@ -159,7 +176,19 @@ static   IN CNAME lindon.K28.com.
 app      IN CNAME vingilot.K28.com.
 ```
 
-Setelah kita reload, trigger, dan sinkronisasi ke Valmar, lakukan verifikasi pada 2 klien berbeda. Berikut hasilnya:
+Setelah kita reload, trigger, dan sinkronisasi ke Valmar, lakukan verifikasi pada 2 klien berbeda. Berikut hasil uji pada Earendil:
+
+![alt text](Images/soal_7_a.png)
+![alt text](Images/soal_7_b.png)
+![alt text](Images/soal_7_c.png)
+
+Lalu berikut hasil uji pada Elwing:
+
+![alt text](Images/soal_7_c.png)
+![alt text](Images/soal_7_d.png)
+![alt text](Images/soal_9_f.png)
+
+Hasil verifikasi dari 2 klien diatas menunjukkan hostname ter-resolve dengan benar, karena konsisten untuk semua hostname.
 
 
 ### Soal 8
@@ -198,7 +227,11 @@ zone "3.225.192.in-addr.arpa" {
 };
 ```
 
-Terakhir kita bisa lakukan verifikasi query reverse pada Tirion, Valmar, dan Klien:
+Terakhir kita bisa lakukan verifikasi query reverse pada Tirion, Valmar:
+
+![alt text](Images/soal_8_a.png)
+![alt text](Images/soal_8_b.png)
+
 
 
 ### Soal 9
