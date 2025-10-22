@@ -27,8 +27,8 @@ Testing
 ```
 dig -x 192.225.3.4
 ```
-![alt text](images/soal_1.png)
-![alt text](images/soal_2.png)
+![alt text](Images/soal_1.png)
+![alt text](Images/soal_2.png)
 
 ### Soal 9
 
@@ -49,7 +49,7 @@ Testing
 ```
 curl static.K28.com
 ```
-![alt text](images/soal_4.png)
+![alt text](Images/soal_4.png)
 
 ### Soal 11
 
@@ -73,7 +73,7 @@ Testing
 ```
 curl app.K28.com
 ```
-![alt text](images/soal_5.png)
+![alt text](Images/soal_5.png)
 
 ### Soal 12
 
@@ -101,7 +101,7 @@ Testing
 curl www.K28.com/statis
 curl www.K28.com/dinamis
 ```
-![alt text](images/soal_6.png)
+![alt text](Images/soal_6.png)
 
 ### Soal 13
 
@@ -133,7 +133,7 @@ Testing
 ```
 curl www.K28.com/statis
 ```
-![alt text](images/soal_7.png)
+![alt text](Images/soal_7.png)
 
 
 
