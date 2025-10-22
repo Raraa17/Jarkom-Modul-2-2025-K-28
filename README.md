@@ -14,7 +14,7 @@
 Untuk nomor 1 membuat topologi 
 ![alt text](Images/soal1_a.png)
 
-###Soal 9
+### Soal 9
 
 Konfigurasi
 File /etc/bind/zones/db.192.225.3
@@ -30,7 +30,7 @@ dig -x 192.225.3.4
 ![alt text](Images/soal_1.png)
 ![alt text](Images/soal_2.png)
 
-### Soal 9
+### Soal 10
 
 Konfigurasi  : 
 File: /etc/nginx/sites-available/static.K28.com    
