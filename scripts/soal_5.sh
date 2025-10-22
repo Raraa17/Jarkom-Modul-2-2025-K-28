@@ -1,16 +1,13 @@
-#Earendil
+#Set hostname pada semua node kecuali ns1 dan ns2, berikut contohnya pada Earendil
 hostnamectl set-hostname earendil
 echo "earendil" > /etc/hostname
-cat << EOF > /etc/hosts
+nano /etc/hosts
 127.0.0.1 localhost
 127.0.1.1 earendil
-::1     ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
-EOF
-reboot  
+
+hostname earendil
+
+# /usr/sbin/named -u bind untuk reload setiap config diubah
 
 #Tirion
 eonwe       IN      A       192.225.1.1  
@@ -23,4 +20,4 @@ sirion      IN      A       192.225.3.2
 lindon      IN      A       192.225.3.4
 vingilot    IN      A       192.225.3.5
 
-rndc reload
+/usr/sbin/named -u bind
