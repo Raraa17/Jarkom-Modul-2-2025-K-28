@@ -35,7 +35,7 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE n
 Setelah itu kita bisa lakukan uji traffic dari host internal, berikut contohnya pada Maglor:
 
 
-![alt text](Images/Soal_2_a.png)
+![alt text](Images/soal_2_a.png)
 
 
 Hasil tersebut menunjukkan NAT berhasil meneruskan trafik.
