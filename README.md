@@ -35,7 +35,7 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE n
 Setelah itu kita bisa lakukan uji traffic dari host internal, berikut contohnya pada Maglor:
 
 
-![alt text](Images/soal_2_a.png)
+![alt text](Images/Soal_2_a.png)
 
 
 Hasil tersebut menunjukkan NAT berhasil meneruskan trafik.
@@ -46,12 +46,12 @@ Hasil tersebut menunjukkan NAT berhasil meneruskan trafik.
 Untuk soal ini memastikan bahwa semua klien dapat saling berkomunikasi lintas jalur melalui routing internal via Eonwe. Berikut hasil tes ping dari Cirdan dengan IP Elwing
 
 
-![alt text](Images/soal_3_b.png)
+![alt text](Images/Soal_3_b.png)
 
 
 Respon ping menunjukkan bahwa routing internal berfungsi dengan seharusnya. Lalu menambahkan `echo "nameserver 192.168.122.1" >> /etc/resolv.conf` kedalam konfigurasi masing-masing node. Untuk mengecek apakah berhasil bisa melakukan uji akses internet ke google.
 
-![alt text](Images/soal_3_a.png)
+![alt text](Images/Soal_3_a.png)
 
 
 ###Soal 4
@@ -109,8 +109,8 @@ nameserver 192.168.122.1" > /etc/resolv.conf
 
 Lalu kita bisa tes dengan menjalankan dig @192.225.3.3 K28.com pada Tirion, dig @192.225.3.3 K28.com pada Valmar, atau pada non-host lainnya. Berikut hasil dig yang diuji pada earendil:
 
-![alt text](Images/soal_4_a.png)
-![alt text](Images/soal_4_b.png)
+![alt text](Images/Soal_4_a.png)
+![alt text](Images/Soal_4_b.png)
 
 
 ### Soal 5
@@ -144,7 +144,7 @@ vingilot IN A 192.225.3.6
 
 Jika sudah bisa reload bind dengan /usr/sbin/named -u bind, dan terakhir melakukan tes pada IP, misalnya dengan dig earendil.K28.com @192.225.3.3 di Earendil
 
-![alt text](Images/soal_5_a.png)
+![alt text](Images/Soal_5_a.png)
 
 
 ### Soal 6 
@@ -159,8 +159,8 @@ rndc notify K28.com
 
 Disini status harus "zone notify queued". Lalu zona disinkronkan pada Valmar dengan `killall named && /usr/sbin/named -u bind` Terakhir kita bisa verifikasi dengan DNS query dan membandingkan 2 serial. Berikut hasil perbandingan yang diuji pada Tirion dan Valmar:
  
-![alt text](Images/soal_6_a.png)
-![alt text](Images/soal_6_b.png)
+![alt text](Images/Soal_6_a.png)
+![alt text](Images/Soal_6_b.png)
 
 
 ### Soal 7 
@@ -178,15 +178,15 @@ app      IN CNAME vingilot.K28.com.
 
 Setelah kita reload, trigger, dan sinkronisasi ke Valmar, lakukan verifikasi pada 2 klien berbeda. Berikut hasil uji pada Earendil:
 
-![alt text](Images/soal_7_a.png)
-![alt text](Images/soal_7_b.png)
-![alt text](Images/soal_7_c.png)
+![alt text](Images/Soal_7_a.png)
+![alt text](Images/Soal_7_b.png)
+![alt text](Images/Soal_7_c.png)
 
 Lalu berikut hasil uji pada Elwing:
 
-![alt text](Images/soal_7_c.png)
-![alt text](Images/soal_7_d.png)
-![alt text](Images/soal_9_f.png)
+![alt text](Images/Soal_7_c.png)
+![alt text](Images/Soal_7_d.png)
+![alt text](Images/Soal_9_f.png)
 
 Hasil verifikasi dari 2 klien diatas menunjukkan hostname ter-resolve dengan benar, karena konsisten untuk semua hostname.
 
@@ -229,8 +229,8 @@ zone "3.225.192.in-addr.arpa" {
 
 Terakhir kita bisa lakukan verifikasi query reverse pada Tirion, Valmar:
 
-![alt text](Images/soal_8_a.png)
-![alt text](Images/soal_8_b.png)
+![alt text](Images/Soal_8_a.png)
+![alt text](Images/Soal_8_b.png)
 
 
 
